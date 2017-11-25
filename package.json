@@ -1,0 +1,19 @@
+{
+  "name": "headline-scraper",
+  "version": "1.0.0",
+  "description": "a web app that scrapes the news headlines",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bfuller123/headline-scraper.git"
+  },
+  "author": "Brett Fuller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bfuller123/headline-scraper/issues"
+  },
+  "homepage": "https://github.com/bfuller123/headline-scraper#readme"
+}
