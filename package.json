@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/bfuller123/headline-scraper/issues"
   },
-  "homepage": "https://github.com/bfuller123/headline-scraper#readme"
+  "homepage": "https://github.com/bfuller123/headline-scraper#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
 }
