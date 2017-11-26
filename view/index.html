@@ -15,15 +15,29 @@
   </div>
   <div class="column left-column">
     <ul id="headlines">
-      <li>Item 1</li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-      <li>Item 4</li>
-      <li>Item 5</li>
       <button type="button" name="button" id="scraper">Get Headlines</button>
     </ul>
   </div>
   <div class="column right-column">
   </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+  function loadResults(results){
+    let headlines = Object.keys(results);
+    for(let i = 0; i < 5; i++){
+      let li = $('<li>');
+      li.html(`<a href="${results[headlines[i]]}">${headlines[i]}</a>`);
+      $('ul').prepend(li);
+    }
+  }
+
+  $('#scraper').on('click', function(){
+    $.get("/scrape", function(data){
+      console.log(data);
+      loadResults(data);
+    })
+  })
+</script>
 </html>

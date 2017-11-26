@@ -59,6 +59,11 @@ li {
   border-bottom: 2px solid #F7864A;
 }
 
+li > a {
+  text-decoration: none;
+  color: #515050;
+}
+
 .right-column {
   font-family: 'Barlow Condensed', sans-serif;
   grid-column-start: 3;
