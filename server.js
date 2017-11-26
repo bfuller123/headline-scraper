@@ -2,7 +2,17 @@ const express = require('express');
 const bp = require('body-parser');
 const cheerio = require("cheerio");
 const request = require("request");
+const mongojs = require("mongojs")
 const app = express();
+
+const databaseUrl = "NYTimes";
+const collections = ["Articles"];
+
+const db = mongojs(databaseUrl, collections);
+
+db.on("error", function(error) {
+  console.log("Database Error:", error);
+});
 
 const PORT = process.env.PORT || 3000;
 
@@ -23,6 +33,7 @@ app.get('/scrape', function(req, res){
       article.summary = $(element).parent().children(".summary").text();
       results.push(article);
     })
+    db.Articles.insert(results);
     console.log(results);
     res.send(results);
   })
