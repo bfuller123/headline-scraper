@@ -1,9 +1,9 @@
 body {
   display: grid;
   grid-template-columns: 7em 25% auto 7em;
-  grid-template-rows: 8em auto 8em;
+  grid-template-rows: 9.5em auto 8em;
   grid-row-gap: 1em;
-  grid-column-gap: 2em;
+  grid-column-gap: 0.5em;
 }
 
 #banner {
@@ -14,6 +14,7 @@ body {
   grid-row-end: 2;
   background-color: #387780;
   color: #F9F7F3;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.33);
 }
 
 h1 {
@@ -21,28 +22,59 @@ h1 {
   font-size: 500%;
   letter-spacing: 8px;
   margin-top: -0.0%;
+  text-shadow: 2px 2px 3px rgba(0,0,0, 0.3);
 }
 
 .larger {
+  text-shadow: 2px 2px 3px rgba(0,0,0, 0.3);
   font-size: 150%;
 }
 
 h3 {
-  font-family: sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   margin-top: -175px;
   margin-left: 25px;
   letter-spacing: 16px;
   color: #F7864A;
+  text-shadow: 2px 2px 3px rgba(0,0,0, 0.3);
 }
 
 .left-column {
   grid-column-start: 2;
   grid-column-end: 3;
-  background-color: yellow;
+  border-right: #E3E1DD 4px solid;
+}
+
+#headlines {
+  color: #515050;
+  list-style: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 150%;
+  letter-spacing: 2px;
+}
+
+li {
+  margin: 2% 15% 2% 0;
+  padding: 4% 2%;
+  border-bottom: 2px solid #F7864A;
 }
 
 .right-column {
+  font-family: 'Barlow Condensed', sans-serif;
   grid-column-start: 3;
   grid-column-end: 4;
-  background-color: blue;
+  border-left: #E3E1DD 4px solid;
+}
+
+button {
+  background-color: #777576;
+  border: none;
+  color: white;
+  margin-left: 5%;
+  margin-top: 5%;
+  padding: 2% 10%;
+  font-size: 110%;
+  letter-spacing: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.33);
 }
