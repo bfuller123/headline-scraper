@@ -59,9 +59,17 @@ li {
   border-bottom: 2px solid #F7864A;
 }
 
-li > a {
-  text-decoration: none;
+.article {
   color: #515050;
+  background-color: white;
+  border: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 90%;
+  letter-spacing: 2px;
+}
+
+.article:hover{
+  box-shadow: 2px 2px 5px rgba(0,0,0,.3);
 }
 
 .right-column {
@@ -71,7 +79,12 @@ li > a {
   border-left: #E3E1DD 4px solid;
 }
 
-button {
+p {
+  margin-left: 5%;
+  font-size: 200%;
+}
+
+#scraper {
   background-color: #777576;
   border: none;
   color: white;

@@ -25,10 +25,10 @@
 <script type="text/javascript">
 
   function loadResults(results){
-    let headlines = Object.keys(results);
     for(let i = 0; i < 5; i++){
       let li = $('<li>');
-      li.html(`<a href="${results[headlines[i]]}">${headlines[i]}</a>`);
+      let summary = results[i].summary || "No Summary Available"
+      li.html(`<button class="article" data-link="${results[i].link}" data-summary="${summary}">${results[i].headline}</button>`);
       $('ul').prepend(li);
     }
   }
@@ -38,6 +38,14 @@
       console.log(data);
       loadResults(data);
     })
+  })
+
+  $(document).on('click', '.article', function(){
+    let link = $(this).attr('data-link');
+    let summary = $(this).attr('data-summary');
+    let p = $('<p>');
+    p.text(summary);
+    $('.right-column').html(p);
   })
 </script>
 </html>

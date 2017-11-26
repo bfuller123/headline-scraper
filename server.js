@@ -15,12 +15,15 @@ app.get('/', function(req, res){
 app.get('/scrape', function(req, res){
   request("https://www.nytimes.com", function(error, response, html){
     let $ = cheerio.load(html);
-    let results = {};
+    let results = [];
     $(".story-heading").each(function(i, element){
-      let headline = $(element).children().text();
-      let link = $(element).children().attr("href");
-      results[headline] = link;
+      let article = {};
+      article.headline = $(element).children().text();
+      article.link = $(element).children().attr("href");
+      article.summary = $(element).parent().children(".summary").text();
+      results.push(article);
     })
+    console.log(results);
     res.send(results);
   })
 })
