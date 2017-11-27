@@ -20,6 +20,16 @@
     </ul>
   </div>
   <div class="column right-column">
+    <div class="summary-area">
+    </div>
+    <div class="comments">
+      <form class="comments comments-form" action="index.html" method="post">
+        <textarea name="user-comment" rows="4" cols="80" id="user-comment" placeholder="Join the Conversation"></textarea>
+        <button type="button" id="add-comment">Add</button>
+      </form>
+      <ul id="saved-comments">
+      </ul>
+    </div>
   </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -30,7 +40,7 @@
       let li = $('<li>');
       let summary = results[i].summary || "No Summary Available"
       li.html(`<button class="article" data-link="${results[i].link}" data-summary="${summary}">${results[i].headline}</button>`);
-      $('ul').prepend(li);
+      $('#headlines').prepend(li);
     }
   }
 
@@ -52,7 +62,15 @@
     a.text(summary);
     a.append(' <i class="fa fa-external-link" aria-hidden="true"></i>');
     p.append(a)
-    $('.right-column').html(p);
+    $('.summary-area').html(p);
+  })
+
+  $('#add-comment').on('click', function(){
+    let comment = $('#user-comment').val().trim();
+    let li = $('<li>')
+    li.text(comment);
+    $('#saved-comments').append(li);
+    $('#user-comment').val('');
   })
 </script>
 </html>
