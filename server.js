@@ -33,7 +33,7 @@ app.get('/scrape', function(req, res){
       article.summary = $(element).parent().children(".summary").text();
       results.push(article);
     })
-    db.Articles.insert(results);
+    db.Articles.insert(results, {ordered: false});
     console.log(results);
     res.send(results);
   })

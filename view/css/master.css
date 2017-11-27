@@ -81,7 +81,17 @@ li {
 
 p {
   margin-left: 5%;
-  font-size: 200%;
+  text-align: justify;
+  font-size: 150%;
+}
+
+.summary {
+  color: #515050;
+  text-decoration: none;
+}
+
+i {
+  font-size: 50%;
 }
 
 #scraper {
