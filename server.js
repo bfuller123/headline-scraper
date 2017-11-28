@@ -58,6 +58,17 @@ app.post('/add', function(req, res){
   })
 })
 
+app.post('/findcomments', function(req, res){
+  db.Articles.find({"headline":req.body.headline}, function(err, data){
+    if(err) {
+      console.log(err);
+    }
+    else {
+      res.json(data[0].comments);
+    }
+  })
+})
+
 app.listen(PORT, function(){
   console.log(`Listening on ${PORT}`);
 })

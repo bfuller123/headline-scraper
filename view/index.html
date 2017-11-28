@@ -48,19 +48,28 @@
     }
   }
 
-  function loadComments(article){
-    // ajax call to backend using headline
-    // append comments to list
+  function loadComments(comments){
+    $('#saved-comments').empty();
+    for(let i = 0; i < comments.length; i++){
+      let li = $('<li>');
+      let commentText = `${comments[i].user}: ${comments[i].comment}`
+      li.text(commentText);
+      $('#saved-comments').append(li);
+    }
+  }
+
+  function fetchComments(headline){
+    $.post("/findcomments", {headline:headline}).done(function(data){
+      loadComments(data);
+    })
   }
 
   function addComment(title, comment, user){
-    console.log(title, comment, user)
-    $.post("/add", {headline:title, username:user, userComment:comment}).done(function(data){console.log('posted')});
+    $.post("/add", {headline:title, username:user, userComment:comment});
   }
 
   $('#scraper').on('click', function(){
     $.get("/scrape", function(data){
-      console.log(data);
       loadResults(data);
     })
   })
@@ -79,6 +88,7 @@
     p.append(a)
     $('.summary-area').html(p);
     $('#add-comment').attr('data-headline', headline);
+    fetchComments(headline);
     $('.comments').css('display', 'block');
   })
 
