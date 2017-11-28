@@ -117,19 +117,22 @@ i {
   font-size: 50%;
 }
 
-.comments-form {
-  display: flex;
-  align-items: center;
-}
-
-#user-comment {
+#user-comment, #username {
   font-family: 'Barlow Condensed', sans-serif;
   letter-spacing: 1px;
 }
 
+#user-comment {
+  margin-bottom: 0.5%;
+}
+
+#username {
+  width: 30%;
+}
+
 #add-comment {
   margin-left: 5px;
-  padding: 1% 2.2% 1% 1%;
+  padding: .7% 1%;
   background-color: #777576;
   border: none;
   color: white;

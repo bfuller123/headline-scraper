@@ -53,6 +53,7 @@ app.post('/add', function(req, res){
       let comments = data[0].comments;
       comments.push({"user": req.body.username, "comment": req.body.userComment})
       db.Articles.update({"headline": req.body.headline}, {$set: {"comments": comments}});
+      res.end();
     }
   })
 })
