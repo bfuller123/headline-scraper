@@ -1,0 +1,53 @@
+const express = require('express');
+const router = express.Router();
+const db = require('../model/database.js');
+const cheerio = require("cheerio");
+const request = require("request");
+
+router.get('/', function(req, res){
+  res.sendFile('/index.html');
+})
+
+router.get('/scrape', function(req, res){
+  request("https://www.nytimes.com", function(error, response, html){
+    let $ = cheerio.load(html);
+    let results = [];
+    $(".story-heading").each(function(i, element){
+      let article = {};
+      article.headline = $(element).children().text();
+      article.link = $(element).children().attr("href");
+      article.summary = $(element).parent().children(".summary").text();
+      article.comments = [];
+      results.push(article);
+    })
+    db.Articles.insert(results, {ordered: false});
+    res.send(results);
+  })
+})
+
+router.post('/add', function(req, res){
+  db.Articles.find({"headline":req.body.headline}, function(err, data){
+    if(err) {
+      console.log(err);
+    }
+    else {
+      let comments = data[0].comments;
+      comments.push({"user": req.body.username, "comment": req.body.userComment})
+      db.Articles.update({"headline": req.body.headline}, {$set: {"comments": comments}});
+      res.end();
+    }
+  })
+})
+
+router.post('/findcomments', function(req, res){
+  db.Articles.find({"headline":req.body.headline}, function(err, data){
+    if(err) {
+      console.log(err);
+    }
+    else {
+      res.json(data[0].comments);
+    }
+  })
+})
+
+module.exports = router;
