@@ -16,7 +16,7 @@
   </div>
   <div class="column left-column">
     <ul id="headlines">
-      <button type="button" name="button" id="scraper">Get Headlines</button>
+      <button type="button" name="button" id="scraper">Check For Updates</button>
     </ul>
   </div>
   <div class="column right-column">
@@ -38,6 +38,10 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
+
+$.get("/scrape", function(data){
+  loadResults(data);
+})
 
   function loadResults(results){
     for(let i = 0; i < 5; i++){

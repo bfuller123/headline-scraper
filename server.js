@@ -23,7 +23,7 @@ app.use(bp.urlencoded({
 }));
 
 app.get('/', function(req, res){
-  res.sendFile('/index.html')
+  res.sendFile('/index.html');
 })
 
 app.get('/scrape', function(req, res){
@@ -39,7 +39,6 @@ app.get('/scrape', function(req, res){
       results.push(article);
     })
     db.Articles.insert(results, {ordered: false});
-    console.log(results);
     res.send(results);
   })
 })
