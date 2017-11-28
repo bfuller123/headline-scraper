@@ -18,6 +18,10 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static('view'));
 
+app.use(bp.urlencoded({
+  extended: true
+}));
+
 app.get('/', function(req, res){
   res.sendFile('/index.html')
 })
@@ -31,11 +35,25 @@ app.get('/scrape', function(req, res){
       article.headline = $(element).children().text();
       article.link = $(element).children().attr("href");
       article.summary = $(element).parent().children(".summary").text();
+      article.comments = [];
       results.push(article);
     })
     db.Articles.insert(results, {ordered: false});
     console.log(results);
     res.send(results);
+  })
+})
+
+app.post('/add', function(req, res){
+  db.Articles.find({"headline":req.body.headline}, function(err, data){
+    if(err) {
+      console.log(err);
+    }
+    else {
+      let comments = data[0].comments;
+      comments.push({"user": req.body.username, "comment": req.body.userComment})
+      db.Articles.update({"headline": req.body.headline}, {$set: {"comments": comments}});
+    }
   })
 })
 

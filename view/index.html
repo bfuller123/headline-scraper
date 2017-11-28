@@ -23,8 +23,9 @@
     <div class="summary-area">
     </div>
     <div class="comments">
-      <form class="comments comments-form" action="index.html" method="post">
+      <form class="comments comments-form" action="index.html" method="POST">
         <textarea name="user-comment" rows="4" cols="80" id="user-comment" placeholder="Join the Conversation"></textarea>
+        <input type="text" name="username" placeholder="Your Name" id="username">
         <button type="button" id="add-comment">Add</button>
       </form>
       <ul id="saved-comments">
@@ -44,6 +45,16 @@
     }
   }
 
+  function loadComments(article){
+    // ajax call to backend using headline
+    // append comments to list
+  }
+
+  function addComment(title, comment, user){
+    console.log(title, comment, user)
+    $.post("/add", {headline:title, username:user, userComment:comment}).done(function(data){console.log('posted')});
+  }
+
   $('#scraper').on('click', function(){
     $.get("/scrape", function(data){
       console.log(data);
@@ -54,6 +65,7 @@
   $(document).on('click', '.article', function(){
     let link = $(this).attr('data-link');
     let summary = $(this).attr('data-summary');
+    let headline = $(this).text();
     let a = $('<a>');
     let p = $('<p>');
     a.attr('href', link);
@@ -63,14 +75,19 @@
     a.append(' <i class="fa fa-external-link" aria-hidden="true"></i>');
     p.append(a)
     $('.summary-area').html(p);
+    $('#add-comment').attr('data-headline', headline);
   })
 
   $('#add-comment').on('click', function(){
     let comment = $('#user-comment').val().trim();
+    let username = $('#username').val().trim();
+    let headline = $('#add-comment').attr('data-headline');
     let li = $('<li>')
-    li.text(comment);
+    li.text(`${username}: ${comment}`);
+    addComment(headline, comment, username);
     $('#saved-comments').append(li);
     $('#user-comment').val('');
+    $('#username').val('');
   })
 </script>
 </html>
