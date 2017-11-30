@@ -1,12 +1,41 @@
-const mongojs = require("mongojs");
+// const mongojs = require("mongojs");
+//
+// const databaseUrl = "NYTimes";
+// const collections = ["Articles"];
+//
+// const db = mongojs(databaseUrl, collections);
+//
+// db.on("error", function(error) {
+//   console.log("Database Error:", error);
+// });
+//
+// module.exports = db;
 
-const databaseUrl = "NYTimes";
-const collections = ["Articles"];
+const mongoose = require('mongoose');
 
-const db = mongojs(databaseUrl, collections);
+var Schema = mongoose.Schema;
 
-db.on("error", function(error) {
-  console.log("Database Error:", error);
-});
+var articleSchema = new Schema({
+  headline: {
+    type: String,
+    required: true,
+    unique: true
+  },
 
-module.exports = db;
+  link: {
+    type: String,
+    required: true
+  },
+
+  summary: {
+    type: String
+  },
+
+  comments: {
+    type: Array
+  }
+}, {collection: "Articles"});
+
+var Article = mongoose.model("Article", articleSchema);
+
+module.exports = Article;
