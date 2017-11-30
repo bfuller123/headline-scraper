@@ -10,9 +10,10 @@ router.get('/', function(req, res){
 })
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/NYTimes", {
-  useMongoClient: true
-});
+mongoose.connect("mongodb://heroku_k4cw7dk8:aq91ps62bas2jbvusc9q3nktp@ds125016.mlab.com:25016/heroku_k4cw7dk8"});
+// mongoose.connect("mongodb://localhost/NYTimes", {
+//   useMongoClient: true
+// });
 
 router.get('/scrape', function(req, res){
   request("https://www.nytimes.com", function(error, response, html){
